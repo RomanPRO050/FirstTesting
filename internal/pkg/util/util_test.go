@@ -1,35 +1,22 @@
 package util
 
-import "testing"
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 func TestReverseInt(t *testing.T) {
 	number, err := ReverseInt(123)
-	if err != nil {
-		t.Errorf("Out of range")
-	}
-	if number != 321 {
-		t.Errorf("Not Reverse number")
-	}
+	assert.Nil(t, err)
+	assert.Equal(t, number, 321, "Число должно быть наоборот")
 	NegNumber, err1 := ReverseInt(-649)
-	if err1 != nil {
-		t.Errorf("Out of range")
-	}
-	if NegNumber != -946 {
-		t.Errorf("Not Reverse number")
-	}
+	assert.Nil(t, err1)
+	assert.Equal(t, NegNumber, -946, "Число должно быть наоборот")
 	ZeroNumber, err2 := ReverseInt(0)
-	if err2 != nil {
-		t.Errorf("Out of range")
-	}
-	if ZeroNumber != 0 {
-		t.Errorf("Not Reverse number")
-	}
+	assert.Nil(t, err2)
+	assert.Equal(t, ZeroNumber, 0, "Число должно быть равно 0")
 	_, err3 := ReverseInt(2147483648)
-	if err3 != nil {
-		t.Errorf("Out of range")
-	}
+	assert.Nil(t, err3, "За пределами значений")
 	_, err4 := ReverseInt(2.1)
-	if err4 == nil {
-		t.Errorf("Not int")
-	}
+	assert.NotNil(t, err4, "число не INT")
 }
